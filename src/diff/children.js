@@ -85,7 +85,7 @@ export function diffChildren(parentDom, newParentVNode, oldParentVNode, context,
 			newDom = diff(parentDom, childVNode, oldVNode, context, isSvg, excessDomChildren, commitQueue, oldDom, isHydrating);
 
 			if ((j = childVNode.ref) && oldVNode.ref != j) {
-				(refs || (refs=[])).push(j, childVNode._component || newDom, childVNode);
+				(refs || (refs=[])).push(j, childVNode._component || newDom, childVNode, oldVNode.ref);
 			}
 
 			// Only proceed if the vnode has not been unmounted by `diff()` above.
@@ -165,7 +165,7 @@ export function diffChildren(parentDom, newParentVNode, oldParentVNode, context,
 	// Set refs only after unmount
 	if (refs) {
 		for (i = 0; i < refs.length; i++) {
-			applyRef(refs[i], refs[++i], refs[++i]);
+			applyRef(refs[i], refs[++i], refs[++i], refs[++i]);
 		}
 	}
 }

@@ -283,8 +283,11 @@ function diffElementNodes(dom, newVNode, oldVNode, context, isSvg, excessDomChil
  * @param {any} value
  * @param {import('../internal').VNode} vnode
  */
-export function applyRef(ref, value, vnode) {
+export function applyRef(ref, value, vnode, oldRef) {
 	try {
+		if (typeof oldRef=='function') oldRef(null);
+		else if (oldRef !== ref && oldRef) oldRef.current = null;
+
 		if (typeof ref=='function') ref(value);
 		else ref.current = value;
 	}
